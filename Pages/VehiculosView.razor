@@ -1,0 +1,50 @@
+@page "/Vehiculos"
+@using Vehiculo_20200553.Data.Models;
+<pagetitle>Lista de vehiculos</pagetitle>
+<h1>Registro</h1>
+<label for="">ID </label><input @bind="Listar.VehiculoID" type="text">
+<label for="">Marca </label> <input @bind="Listar.Marca" type="text">
+<label for="">Modelo </label><input @bind="Listar.Modelo" type="text">
+<label for="">Año</label><input @bind="Listar.Año" type="text">
+<br>
+<br>
+<label for="">Color</label><input @bind="Listar.Color" type="text">
+<button class="btn @(Listar.VehiculoID)" @onclick="Guardar" >Guardar</button>
+<table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Año</th>
+                <th>Color</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehiculo in vehiculos)
+            {
+                <tr>
+                    <td>@vehiculo.VehiculoID</td>
+                    <td>@vehiculo.Marca</td>
+                    <td>@vehiculo.Modelo</td>
+                    <td>@vehiculo.Año</td>
+                    <td>@vehiculo.Color</td>
+                </tr>
+            }
+        </tbody>
+        </table>
+@code
+{
+public vehiculo Listar {get; set;}= new vehiculo();
+
+public List<vehiculo> vehiculos{get; set;}=new List<vehiculo>();
+
+void Guardar()
+{
+    if(!string.IsNullOrEmpty(Listar.VehiculoID)
+    )
+    vehiculos!.Add(Listar);
+}
+
+
+}
